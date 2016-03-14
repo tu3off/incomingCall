@@ -1,4 +1,4 @@
-package floaterr.floater;
+package floaterr.floater.incommingcall;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,9 +7,12 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import floaterr.floater.floatingwindow.FloatingWindowService;
+
 public class IncomingCall extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.d("IncomingCall", "yeah");
         try {
             TelephonyManager tmgr = (TelephonyManager) context
                     .getSystemService(Context.TELEPHONY_SERVICE);
@@ -30,7 +33,13 @@ public class IncomingCall extends BroadcastReceiver {
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
             super.onCallStateChanged(state, incomingNumber);
-            context.startService(new Intent(context, FloatingWindow.class));
+            Log.d("IncomingCall", "state: " + state);
+            switch (state) {
+                case PhoneStateListener.LISTEN_SERVICE_STATE:
+                    context.startService(new Intent(context, FloatingWindowService.class));
+                    break;
+
+            }
         }
     }
 }

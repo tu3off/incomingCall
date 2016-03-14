@@ -3,10 +3,10 @@ package floaterr.floater;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import floaterr.floater.floatingwindow.FloatingWindowService;
 
 public class MainActivity extends Activity {
 
@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View arg0) {
 
-                startService(new Intent(MainActivity.this,FloatingWindow.class));
+                startService(new Intent(MainActivity.this,FloatingWindowService.class));
             }
         });
     }
